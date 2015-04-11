@@ -40,8 +40,6 @@ public class IngestController {
 			e.printStackTrace();
 		}
 		return null;
-
-
     }
     
     
