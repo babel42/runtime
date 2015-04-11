@@ -7,13 +7,7 @@
 	<name>ca-framework</name>
 	<packaging>jar</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
-	<properties>
-		<java-version>1.7</java-version>
-		<org.springframework-version>4.1.0.RELEASE</org.springframework-version>
-		<org.springframework.security-version>3.2.0.RELEASE</org.springframework.security-version>
-		<org.aspectj-version>1.8.1</org.aspectj-version>
-		<org.slf4j-version>1.6.1</org.slf4j-version>
-	</properties>
+
 	<dependencies>
 		<!-- Kafka -->
 		<dependency>
@@ -21,54 +15,10 @@
 			<artifactId>kafka_2.9.2</artifactId>
 			<version>0.8.2.0</version>
 			<scope>compile</scope>
-			<exclusions>
-				<exclusion>
-					<artifactId>jmxri</artifactId>
-					<groupId>com.sun.jmx</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>jms</artifactId>
-					<groupId>javax.jms</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>jmxtools</artifactId>
-					<groupId>com.sun.jdmk</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		
-		<!-- Spring -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${org.springframework-version}</version>
-			<exclusions>
-				<!-- Exclude Commons Logging in favor of SLF4j -->
-				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
 
 		<!-- Logging -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${org.slf4j-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.16</version>
-			<scope>runtime</scope>
-		</dependency>
 	</dependencies>
 	<repositories>
 		<!-- For testing against latest Spring snapshots -->
