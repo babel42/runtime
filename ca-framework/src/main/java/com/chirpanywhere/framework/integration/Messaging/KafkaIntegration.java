@@ -24,8 +24,11 @@ public class KafkaIntegration implements MessagingIntegration {
 	public String initMessagingSystem() {
 		
 		props = new Properties();
-		props.put("metadata.broker.list", "kafka1:9092,kafka2:9092");
-		props.put("serializer.class", "kafka.serializer.StringEncoder");
+		props.put("bootstrap.servers", "kafka:9092");
+		props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+		props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+		
+
 		props.put("producer.type", "async");
 		props.put("request.required.acks", "1");
 			
