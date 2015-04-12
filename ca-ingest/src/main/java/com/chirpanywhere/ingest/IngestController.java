@@ -4,17 +4,15 @@ import java.util.HashMap;
 import java.util.UUID;
 import java.util.concurrent.Future;
 
-//import org.apache.kafka.clients.producer;
-
-
-import org.apache.kafka.clients.producer.RecordMetadata;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.chirpanywhere.framework.errorhandling.CAInvalidMessageException;
 import com.chirpanywhere.framework.errorhandling.InvalidClusterConfigException;
 import com.chirpanywhere.framework.integration.Messaging.KafkaIntegration;
 import com.chirpanywhere.framework.utils.Constants;
+//import org.apache.kafka.clients.producer;
+import org.apache.kafka.clients.producer.RecordMetadata;
 
 @RestController
 public class IngestController {
@@ -33,7 +31,7 @@ public class IngestController {
 		msgMap.put(Constants.TOPIC, Constants.KAFKA_DEMO_WECHAT);
 		msgMap.put(Constants.MESSAGE_VALUE, msg);
 		msgMap.put(Constants.MESSAGE_KEY, UUID.randomUUID()
-				.getMostSignificantBits());
+				.toString());
 		try {
 			Future<RecordMetadata> rm = kafka.publishMessage(msgMap);
 		} catch (CAInvalidMessageException e) {
