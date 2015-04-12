@@ -33,13 +33,13 @@ public class IngestController {
 	}
 
 	@RequestMapping(value="/ott/wechat/send",method=RequestMethod.POST)
-	public String publish(@RequestBody String msg) {
+	public String publish(@RequestBody String msg, @RequestParam("phone") String phone) {
 		String uuid = UUID.randomUUID().toString();
 		kafka.initMessagingSystem();
 		// TODO: this object creation is not needed. Optimize this later
 		HashMap msgMap = new HashMap();
 		msgMap.put(Constants.TOPIC, Constants.KAFKA_DEMO_WECHAT);
-		msgMap.put(Constants.MESSAGE_VALUE, "Message key: " + uuid + ", value=" + msg);
+		msgMap.put(Constants.MESSAGE_VALUE, "phone:"+phone+",key:" + uuid + ",msg=" + msg);
 		msgMap.put(Constants.MESSAGE_KEY, uuid);
 		msgMap.put(Constants.PAYLOAD, msg);
 		try {
