@@ -19,6 +19,7 @@ public class Consumer implements Runnable {
 
 	public void run() {
 		ConsumerIterator<byte[], byte[]> it = m_stream.iterator();
+		System.out.println("run() got messages:" + it.size());
 		while (it.hasNext()) {
 			String message = new String(it.next().message());
 			// Message: phone:<number>,key:uuid,msg:<message>
