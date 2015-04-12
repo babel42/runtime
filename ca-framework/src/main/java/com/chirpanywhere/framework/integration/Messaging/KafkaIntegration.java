@@ -1,38 +1,48 @@
 package com.chirpanywhere.framework.integration.Messaging;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
-
-import kafka.producer.ProducerConfig;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.PartitionInfo;
 
+import kafka.consumer.ConsumerConfig;
+import kafka.consumer.ConsumerConnector;
+import kafka.consumer.ConsumerIterator;
+import kafka.consumer.KafkaStream;
+
 import com.chirpanywhere.framework.errorhandling.CAInvalidMessageException;
+import com.chirpanywhere.framework.errorhandling.InvalidClusterConfigException;
 import com.chirpanywhere.framework.utils.Constants;
+
+import kafka.producer.ProducerConfig;
 
 public class KafkaIntegration implements MessagingIntegration {
 	private ProducerConfig config = null;
 	Properties props = null;
-	KafkaProducer producer=null;
+	KafkaProducer producer = null;
 
 	@Override
 	public String initMessagingSystem() {
-		
+
 		props = new Properties();
 		props.put("bootstrap.servers", "kafka:9092");
-		props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-		props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-		
-		//@TODO: Check if these are needed
+		// props.put("serializer.class", "kafka.serializer.StringEncoder");
+		props.put("serializer.class", "kafka.serializer.StringEncoder");
+		props.put("key.serializer",
+				"org.apache.kafka.common.serialization.StringSerializer");
+		props.put("value.serializer",
+				"org.apache.kafka.common.serialization.StringSerializer");
 		props.put("producer.type", "async");
 		props.put("request.required.acks", "1");
-			
+
 		producer = new KafkaProducer(props);
 
 		return null;
@@ -45,15 +55,22 @@ public class KafkaIntegration implements MessagingIntegration {
 	// implementation for round robbin)
 	//
 	public Future<RecordMetadata> publishMessage(Map message)
-			throws CAInvalidMessageException {
+			throws CAInvalidMessageException, InvalidClusterConfigException {
 
 		if (validateMessage(message) == false)
-			throw new CAInvalidMessageException();
+		{
+			String text = "The message is in an invalid format";
+			System.out.println("text");
+			throw new CAInvalidMessageException(text);
+		}
+			
 
-		List <PartitionInfo> partitions = producer.partitionsFor((String) message.get(Constants.TOPIC));
-		
+		List<PartitionInfo> partitions = producer
+				.partitionsFor((String) message.get(Constants.TOPIC));
+
 		int partitionId = pickRandomPartition(partitions);
 		
+
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		ProducerRecord producerRec = new ProducerRecord(
 				(String) message.get(Constants.TOPIC), partitionId,
@@ -65,13 +82,20 @@ public class KafkaIntegration implements MessagingIntegration {
 		return future;
 	}
 
-	private int pickRandomPartition(List<PartitionInfo> partitions) {	
-		int size = partitions.size()-1;
-		Random random = new Random();
-		int rand = random.nextInt(size);
-		if (rand <0) rand = 0;
-		if (rand >=size) rand = size - 1;
-		return rand;
+	private int pickRandomPartition(List<PartitionInfo> partitions) throws InvalidClusterConfigException {
+		int size = partitions.size();
+		
+		if (size == 0)
+		{			
+			System.out.println("The cluster configuration does not have any nodes in it");
+			throw new InvalidClusterConfigException("The cluster configuration does not have any nodes in it");		
+		}
+
+		Random rand = new Random();
+		int part =  rand.nextInt(size);
+		
+		//-1, because it is going to be used as index for on a list
+		return part-1;
 	}
 
 	// To Do
@@ -80,9 +104,16 @@ public class KafkaIntegration implements MessagingIntegration {
 	}
 
 	@Override
-	public Map consumeMessage(Channel ch) {
-		// TODO Auto-generated method stub
-		return null;
+	public void consumeMessage(String group, String topic,int threads) {
+        ConsumerGroup example = new ConsumerGroup("zk:2181", group, topic);
+        example.run(threads);
+ 
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException ie) { 
+ 
+        }
+        example.shutdown();
 	}
 
 }
