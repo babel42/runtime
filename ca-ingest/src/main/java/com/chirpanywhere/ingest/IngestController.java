@@ -34,6 +34,7 @@ public class IngestController {
 
 	@RequestMapping(value="/ott/wechat/send",method=RequestMethod.POST)
 	public String publish(@RequestBody String msg, @RequestParam("phone") String phone) {
+		System.out.println("Producer: Phone[" + phone + "], msg[" + msg+"]");
 		String uuid = UUID.randomUUID().toString();
 		kafka.initMessagingSystem();
 		// TODO: this object creation is not needed. Optimize this later
