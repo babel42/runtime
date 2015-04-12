@@ -32,7 +32,7 @@ public class IngestController {
     	HashMap msgMap = new HashMap();
     	msgMap.put(Constants.TOPIC,Constants.KAFKA_DEMO_WECHAT);
     	msgMap.put(Constants.MESSAGE_VALUE, msg);
-    	msgMap.put(Constants.MESSAGE_KEY,UUID.randomUUID().getMostSignificantBits());
+    	msgMap.put(Constants.MESSAGE_KEY,UUID.randomUUID().toString());
     	try {
 			Future<RecordMetadata> rm = kafka.publishMessage(msgMap);
 		} catch (CAInvalidMessageException e) {

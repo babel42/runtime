@@ -29,7 +29,7 @@ public class KafkaIntegration implements MessagingIntegration {
 		props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 		props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 		
-
+		//@TODO: Check if these are needed
 		props.put("producer.type", "async");
 		props.put("request.required.acks", "1");
 			
