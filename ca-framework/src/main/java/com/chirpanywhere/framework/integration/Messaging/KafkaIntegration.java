@@ -88,6 +88,9 @@ public class KafkaIntegration implements MessagingIntegration {
 		int part =  rand.nextInt(size);
 		
 		//-1, because it is going to be used as index for on a list
+		//@TODO we don't know why we need this....
+		if (part<=0) return 0;
+		
 		return part-1;
 	}
 
