@@ -25,13 +25,13 @@ public class IngestController {
 
 	@RequestMapping("/send/demo/wechat")
 	public String publish(String msg) {
+		String uuid = UUID.randomUUID().toString();
 		kafka.initMessagingSystem();
 		// TODO: this object creation is not needed. Optimize this later
 		HashMap msgMap = new HashMap();
 		msgMap.put(Constants.TOPIC, Constants.KAFKA_DEMO_WECHAT);
-		msgMap.put(Constants.MESSAGE_VALUE, msg);
-		msgMap.put(Constants.MESSAGE_KEY, UUID.randomUUID()
-				.toString());
+		msgMap.put(Constants.MESSAGE_VALUE, "Message key: " + uuid);
+		msgMap.put(Constants.MESSAGE_KEY, uuid);
 		try {
 			Future<RecordMetadata> rm = kafka.publishMessage(msgMap);
 		} catch (CAInvalidMessageException e) {
@@ -45,7 +45,7 @@ public class IngestController {
 	}
 
 	@RequestMapping("/get/demo/wechat")
-	public void consume(String group, String topic, int threads) {
-		kafka.consumeMessage(group, topic, threads);
+	public void consume() {
+		kafka.consumeMessage("A", "kafka_demo_wechat", 2);
 	}
 }
