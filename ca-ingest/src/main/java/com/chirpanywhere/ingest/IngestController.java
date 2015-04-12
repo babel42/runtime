@@ -39,7 +39,7 @@ public class IngestController {
 		// TODO: this object creation is not needed. Optimize this later
 		HashMap msgMap = new HashMap();
 		msgMap.put(Constants.TOPIC, Constants.KAFKA_DEMO_WECHAT);
-		msgMap.put(Constants.MESSAGE_VALUE, "Message key: " + uuid);
+		msgMap.put(Constants.MESSAGE_VALUE, "Message key: " + uuid + ", value=" + msg);
 		msgMap.put(Constants.MESSAGE_KEY, uuid);
 		msgMap.put(Constants.PAYLOAD, msg);
 		try {
