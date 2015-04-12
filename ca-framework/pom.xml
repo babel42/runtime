@@ -17,9 +17,9 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.twilio.sdk</groupId>
-			<artifactId>twilio-java-sdk</artifactId>
-			<version>3.8.1-SNAPSHOT</version>
+			<groupId>com.chirpanywhere</groupId>
+			<artifactId>ca-outgoing</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
 		<!-- Logging -->
