@@ -1,9 +1,5 @@
 package com.chirpanywhere.framework.integration.Messaging;
 
-import kafka.consumer.ConsumerConfig;
-import kafka.consumer.KafkaStream;
-import kafka.javaapi.consumer.ConsumerConnector;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +7,10 @@ import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+
+import kafka.consumer.ConsumerConfig;
+import kafka.consumer.KafkaStream;
+import kafka.javaapi.consumer.ConsumerConnector;
 public class ConsumerGroup {
 	private ConsumerConnector consumer=null;
     private String topic=null;

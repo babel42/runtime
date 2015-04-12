@@ -1,28 +1,21 @@
 package com.chirpanywhere.framework.integration.Messaging;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
+
+import kafka.producer.ProducerConfig;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.PartitionInfo;
 
-import kafka.consumer.ConsumerConfig;
-import kafka.consumer.ConsumerConnector;
-import kafka.consumer.ConsumerIterator;
-import kafka.consumer.KafkaStream;
-
 import com.chirpanywhere.framework.errorhandling.CAInvalidMessageException;
 import com.chirpanywhere.framework.errorhandling.InvalidClusterConfigException;
 import com.chirpanywhere.framework.utils.Constants;
-
-import kafka.producer.ProducerConfig;
 
 public class KafkaIntegration implements MessagingIntegration {
 	private ProducerConfig config = null;
