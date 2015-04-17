@@ -13,6 +13,6 @@ cd ~/git/runtime/ca-ingest
 mvn install
 
 cp ~/git/runtime/ca-ingest/target/ca-ingest-0.1.0.jar ~/dev/docker/docker-java
-cd ~/dev/docker/docker-java
+cd ~/git/runtime/ca-deploy/ingest-image-build
 docker build -t babel42/runtime:v2 .
 
