@@ -102,8 +102,8 @@ System.out.println("KafkaIntegration.publishMessage:message[" + msg + "]");
 
 	@Override
 	public void consumeMessage(String group, String topic,int threads) {
-        SingleFileConsumer example = new SingleFileConsumer("zk:2181", group, topic);
-        example.run(threads);
+        ConsumerGroup example = new ConsumerGroup("zk:2181", group, topic);
+        example.execute(threads);
         System.out.print("just did example.run()");
         
         System.out.println("About to example.shutdown()");
