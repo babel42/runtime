@@ -21,20 +21,21 @@ public class KafkaIntegration implements MessagingIntegration {
 	private ProducerConfig config = null;
 	Properties props = null;
 	KafkaProducer producer = null;
-
+	
+	
 	@Override
 	public String initMessagingSystem() {
 
 		props = new Properties();
 		props.put("bootstrap.servers", "kafka:9092");
 		// props.put("serializer.class", "kafka.serializer.StringEncoder");
-		props.put("serializer.class", "kafka.serializer.StringEncoder");
+		//props.put("serializer.class", "kafka.serializer.StringEncoder");
 		props.put("key.serializer",
 				"org.apache.kafka.common.serialization.StringSerializer");
 		props.put("value.serializer",
 				"org.apache.kafka.common.serialization.StringSerializer");
-		props.put("producer.type", "async");
-		props.put("request.required.acks", "1");
+		//props.put("producer.type", "async");
+		//props.put("request.required.acks", "1");
 
 		producer = new KafkaProducer(props);
 
@@ -63,13 +64,13 @@ public class KafkaIntegration implements MessagingIntegration {
 
 		int partitionId = pickRandomPartition(partitions);
 		
-
+       String msg = (String)message.get(Constants.MESSAGE_VALUE);
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		ProducerRecord producerRec = new ProducerRecord(
 				(String) message.get(Constants.TOPIC), partitionId,
 				message.get(Constants.MESSAGE_KEY),
-				message.get(Constants.MESSAGE_VALUE));
-
+				msg);
+System.out.println("KafkaIntegration.publishMessage:message[" + msg + "]");
 		Future<RecordMetadata> future = producer.send(producerRec);
 
 		return future;
@@ -101,15 +102,11 @@ public class KafkaIntegration implements MessagingIntegration {
 
 	@Override
 	public void consumeMessage(String group, String topic,int threads) {
-        ConsumerGroup example = new ConsumerGroup("zk:2181", group, topic);
+        SingleFileConsumer example = new SingleFileConsumer("zk:2181", group, topic);
         example.run(threads);
- 
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException ie) { 
- 
-        }
+        System.out.print("just did example.run()");
+        
+        System.out.println("About to example.shutdown()");
         example.shutdown();
 	}
-
 }

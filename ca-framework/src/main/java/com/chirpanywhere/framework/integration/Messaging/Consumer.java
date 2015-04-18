@@ -22,6 +22,7 @@ public class Consumer implements Runnable {
 		System.out.println("run() got messages:" + it.size());
 		while (it.hasNext()) {
 			String message = new String(it.next().message());
+			System.out.println("Consumer.run(): message: " + message);
 			// Message: phone:<number>,key:uuid,msg:<message>
 			StringTokenizer st = new StringTokenizer(message);
 			String phoneText = null;

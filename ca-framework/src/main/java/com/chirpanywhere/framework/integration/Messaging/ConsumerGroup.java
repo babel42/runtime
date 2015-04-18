@@ -34,12 +34,12 @@ public class ConsumerGroup {
         }
    }
  
-    public void run(int a_numThreads) {
+    public void execute(int a_numThreads) {
         Map<String, Integer> topicCountMap = new HashMap<String, Integer>();
         topicCountMap.put(topic, new Integer(a_numThreads));
         Map<String, List<KafkaStream<byte[], byte[]>>> consumerMap = consumer.createMessageStreams(topicCountMap);
         List<KafkaStream<byte[], byte[]>> streams = consumerMap.get(topic);
- 
+        
         // now launch all the threads
         //
         executor = Executors.newFixedThreadPool(a_numThreads);
@@ -48,6 +48,7 @@ public class ConsumerGroup {
         //
         int threadNumber = 0;
         for (final KafkaStream stream : streams) {
+        	System.out.println("ConsumerGroup: run(): Starting executor" + threadNumber);
             executor.submit(new Consumer(stream, threadNumber));
             threadNumber++;
         }
