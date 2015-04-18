@@ -17,6 +17,11 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
+	    <groupId>org.apache.kafka</groupId>
+	    <artifactId>kafka-clients</artifactId>
+	    <version>0.8.2.0</version>
+	</dependency>
+		<dependency>
 			<groupId>com.chirpanywhere</groupId>
 			<artifactId>ca-outgoing</artifactId>
 			<version>0.0.1-SNAPSHOT</version>

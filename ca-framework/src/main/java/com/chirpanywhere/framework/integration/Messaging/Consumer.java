@@ -19,10 +19,22 @@ public class Consumer implements Runnable {
 
 	public void run() {
 		ConsumerIterator<byte[], byte[]> it = m_stream.iterator();
-		System.out.println("run() got messages:" + it.size());
-		while (it.hasNext()) {
+		System.out.println("Consumer["+ m_threadNumber+"].run() begin");
+		System.out.println("Consumer["+ m_threadNumber+"].run() got messages:" + it.size());
+		System.out.println("Consumer["+ m_threadNumber+"].run() it.hasNext:" + it.hasNext());
+		System.out.println("Consumer["+ m_threadNumber+"].run() it.length:" + it.length());
+		System.out.println("Consumer["+ m_threadNumber+"].run() it.counted:" + it.counted());
+        try {
+		System.out.println("Consumer["+ m_threadNumber+"].run() it.next:" + it.next());
+        } catch(Throwable t) {
+        	System.out.println(t.getMessage());
+        	t.printStackTrace();
+        }
+
+		while(it.hasNext()) {
+			
 			String message = new String(it.next().message());
-			System.out.println("Consumer.run(): message: " + message);
+			System.out.println("Consumer["+ m_threadNumber+"].run() message:" + message);
 			// Message: phone:<number>,key:uuid,msg:<message>
 			StringTokenizer st = new StringTokenizer(message);
 			String phoneText = null;
@@ -43,6 +55,8 @@ public class Consumer implements Runnable {
 			}
 			
 			String msg = null;
+			System.out.println("Consumer["+ m_threadNumber+"].run() sending to TwilioAPI");
+
 			TwilioSMSSender sender = new TwilioSMSSender();
 			try {
 				sender.send(phone,msg);
@@ -51,8 +65,7 @@ public class Consumer implements Runnable {
 				e.printStackTrace();
 			}
 
-			System.out.println("Thread " + m_threadNumber + ": " + message);
 		}
-		System.out.println("Shutting down Thread: " + m_threadNumber);
+		System.out.println("Consumer["+ m_threadNumber+"].run(): shutting down");
 	}
 }
