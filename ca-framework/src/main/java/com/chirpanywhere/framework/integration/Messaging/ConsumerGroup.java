@@ -52,6 +52,7 @@ public class ConsumerGroup {
             executor.submit(new Consumer(stream, threadNumber));
             threadNumber++;
         }
+        System.out.println("ConsumerGroup.execute(): exiting method");
     }
  
     private static ConsumerConfig createConsumerConfig(String a_zookeeper, String a_groupId) {
@@ -61,6 +62,7 @@ public class ConsumerGroup {
         props.put("zookeeper.session.timeout.ms", "400");
         props.put("zookeeper.sync.time.ms", "200");
         props.put("auto.commit.interval.ms", "1000");
+        props.put("auto.offset.reset", "smallest");
  
         return new ConsumerConfig(props);
     }

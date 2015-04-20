@@ -17,7 +17,9 @@ public class TwilioSMSSender {
 	public static final String AUTH_TOKEN = "7476f459573937aec71b04f768881b91"; 
 
 	public void send(String phone, String msg) throws TwilioRestException {
+		System.out.println("TwilioSMSSender.send(): received ["+phone +"/"+msg+"]");
 		TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN); 
+		System.out.println("TwilioSMSSender.send(): created client");
 
 		// Build the parameters 
 		List<NameValuePair> params = new ArrayList<NameValuePair>(); 

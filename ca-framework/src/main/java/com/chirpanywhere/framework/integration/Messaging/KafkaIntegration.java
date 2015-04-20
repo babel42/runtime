@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
+import java.util.Vector;
 import java.util.concurrent.Future;
 
 import kafka.producer.ProducerConfig;
@@ -34,8 +35,8 @@ public class KafkaIntegration implements MessagingIntegration {
 				"org.apache.kafka.common.serialization.StringSerializer");
 		props.put("value.serializer",
 				"org.apache.kafka.common.serialization.StringSerializer");
-		//props.put("producer.type", "async");
-		//props.put("request.required.acks", "1");
+		//props.put("producer.type", "sync");
+		props.put("acks", "0");
 
 		producer = new KafkaProducer(props);
 
@@ -65,12 +66,13 @@ public class KafkaIntegration implements MessagingIntegration {
 		int partitionId = pickRandomPartition(partitions);
 		
        String msg = (String)message.get(Constants.MESSAGE_VALUE);
+       String topic = (String) message.get(Constants.TOPIC);
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		ProducerRecord producerRec = new ProducerRecord(
-				(String) message.get(Constants.TOPIC), partitionId,
+				topic, partitionId,
 				message.get(Constants.MESSAGE_KEY),
 				msg);
-System.out.println("KafkaIntegration.publishMessage:message[" + msg + "]");
+System.out.println("KafkaIntegration.publishMessage:topic/message[" + topic + "/" +  msg + "]");
 		Future<RecordMetadata> future = producer.send(producerRec);
 
 		return future;
@@ -102,11 +104,23 @@ System.out.println("KafkaIntegration.publishMessage:message[" + msg + "]");
 
 	@Override
 	public void consumeMessage(String group, String topic,int threads) {
-        ConsumerGroup example = new ConsumerGroup("zk:2181", group, topic);
-        example.execute(threads);
-        System.out.print("just did example.run()");
-        
-        System.out.println("About to example.shutdown()");
+		SimpleExample ex = new SimpleExample();
+		List<String> list = new Vector();
+		list.add("zk");
+		try {
+			ex.run(1, "/kafka/demo/wechat", 0, list, 2181);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        /*ConsumerGroup example = new ConsumerGroup("zk:2181", group, topic);
+        example.execute(threads);*/
+        /*
+        System.out.print("KafkaIntegration.consumeMessage: just did example.run(), about to wait 3 seconds...");
+        try{Thread.sleep(3000);}catch(Exception e) {System.out.println("Cannot consume msg. Ex:" + e.getMessage());}
+        System.out.println("KafkaIntegration.consumeMessage: About to example.shutdown()");
         example.shutdown();
+        System.out.println("KafkaIntegration.consumeMessage: shutdown() complete");
+        */
 	}
 }
