@@ -1,7 +1,7 @@
 #!/bin/bash
 
 docker-compose stop
-docker ps -a | cut -f 1 -d ' ' >tmp
+docker ps -aq | cut -f 1 -d ' ' >tmp
 docker stop `cat tmp`
 docker rm `cat tmp`
 rm tmp
