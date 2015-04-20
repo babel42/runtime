@@ -1,5 +1,4 @@
 #!/bin/bash
-cp ${HOME}/git/runtime/ca-ingest/target/ca-*.war ${HOME}/deploy
 docker run -d -p=8080:8080 -v ${HOME}/git/runtime/ca-ingest/target:/usr/local/tomcat/webapps/chirp --name tomcat8 tomcat
 docker-compose up -d
 #docker-compose scale kafka=3
