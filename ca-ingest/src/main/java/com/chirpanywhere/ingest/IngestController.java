@@ -4,12 +4,11 @@ import java.util.HashMap;
 import java.util.UUID;
 import java.util.concurrent.Future;
 
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+
 
 import com.chirpanywhere.framework.errorhandling.CAInvalidMessageException;
 import com.chirpanywhere.framework.errorhandling.InvalidClusterConfigException;
@@ -19,18 +18,14 @@ import com.chirpanywhere.framework.utils.Constants;
 
 
 
+
 //import org.apache.kafka.clients.producer;
 import org.apache.kafka.clients.producer.RecordMetadata;
 
-@RestController
+@Controller
 @RequestMapping("/demo")
 public class IngestController {
 	KafkaIntegration kafka = new KafkaIntegration();
-
-	@RequestMapping(method=RequestMethod.GET)
-	public String index() {
-		return "Greetings from Spring Boot!";
-	}
 
 	@RequestMapping(value="/ott/wechat/send",method=RequestMethod.POST)
 	public String publish(@RequestParam("msg") String msg, @RequestParam("phone") String phone) {
