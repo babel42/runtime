@@ -28,7 +28,7 @@ public class KafkaIntegration implements MessagingIntegration {
 	public String initMessagingSystem() {
 
 		props = new Properties();
-		props.put("bootstrap.servers", "kafka:9092");
+		props.put("bootstrap.servers", "Constants.KAFKA_HOST");
 		// props.put("serializer.class", "kafka.serializer.StringEncoder");
 		//props.put("serializer.class", "kafka.serializer.StringEncoder");
 		props.put("key.serializer",
@@ -106,9 +106,9 @@ System.out.println("KafkaIntegration.publishMessage:topic/message[" + topic + "/
 	public void consumeMessage(String group, String topic,int threads) {
 		SimpleExample ex = new SimpleExample();
 		List<String> list = new Vector();
-		list.add("zk");
+		list.add(Constants.ZOOKEEPER_HOST);
 		try {
-			ex.run(1, "/kafka/demo/wechat", 0, list, 2181);
+			ex.run(1, "/kafka/demo/wechat", 0, list, Integer.parseInt(Constants.ZOOKEEPER_PORT));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
