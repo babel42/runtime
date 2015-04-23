@@ -105,7 +105,7 @@ System.out.println("KafkaIntegration.publishMessage:topic/message[" + topic + "/
 		List<String> list = new Vector();
 		list.add(Constants.ZOOKEEPER_HOST);
 		try {
-			ex.run(1, "/kafka/demo/wechat", 0, list, Integer.parseInt(Constants.ZOOKEEPER_PORT));
+			ex.run(1, Constants.TOPIC, 0, list, Integer.parseInt(Constants.ZOOKEEPER_PORT));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
