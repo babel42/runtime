@@ -18,11 +18,11 @@ import com.chirpanywhere.framework.utils.Constants;
 import org.apache.kafka.clients.producer.RecordMetadata;
 
 @Controller
-@RequestMapping("/demo")
+@RequestMapping("/ott/wechat")
 public class IngestController {
 	KafkaIntegration kafka = new KafkaIntegration();
 
-	@RequestMapping(value="/ott/wechat/send",method=RequestMethod.POST)
+	@RequestMapping(value="/send",method=RequestMethod.POST)
 	public String publish(@RequestParam("msg") String msg, @RequestParam("phone") String phone) {
 		System.out.println("Producer: Phone[" + phone + "], msg[" + msg+"]");
 		String uuid = UUID.randomUUID().toString();
@@ -46,7 +46,7 @@ public class IngestController {
 		return null;
 	}
 
-	@RequestMapping(value="/ott/wechat/get",method=RequestMethod.GET)
+	@RequestMapping(value="/get",method=RequestMethod.GET)
 	public void consume(@RequestParam("group") String group, 
 			@RequestParam("topic") String topic, @RequestParam("numOfThreads") int numOfThreads) {
 		kafka.consumeMessage(group, topic, numOfThreads);
