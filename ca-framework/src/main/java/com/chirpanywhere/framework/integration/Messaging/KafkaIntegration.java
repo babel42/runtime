@@ -27,7 +27,7 @@ public class KafkaIntegration implements MessagingIntegration {
 	public String initMessagingSystem() {
 
 		props = new Properties();
-		props.put("bootstrap.servers", "Constants.KAFKA_HOST");
+		props.put("bootstrap.servers", Constants.KAFKA_HOST);
 		// props.put("serializer.class", "kafka.serializer.StringEncoder");
 		//props.put("serializer.class", "kafka.serializer.StringEncoder");
 		props.put("key.serializer",
