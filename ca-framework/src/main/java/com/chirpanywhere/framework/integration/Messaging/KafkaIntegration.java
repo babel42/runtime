@@ -24,7 +24,6 @@ public class KafkaIntegration implements MessagingIntegration {
 	KafkaProducer producer = null;
 	
 	
-	@Override
 	public String initMessagingSystem() {
 
 		props = new Properties();
@@ -43,7 +42,6 @@ public class KafkaIntegration implements MessagingIntegration {
 		return null;
 	}
 
-	@Override
 	// The message will have the following in the map
 	// Topic: The topic where to publish, key, message value
 	// The partition will be found based on an algorithm. (Need an
@@ -102,7 +100,6 @@ System.out.println("KafkaIntegration.publishMessage:topic/message[" + topic + "/
 		return true;
 	}
 
-	@Override
 	public void consumeMessage(String group, String topic,int threads) {
 		SimpleExample ex = new SimpleExample();
 		List<String> list = new Vector();
