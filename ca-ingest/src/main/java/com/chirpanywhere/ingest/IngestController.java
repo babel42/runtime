@@ -22,16 +22,19 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 public class IngestController {
 	KafkaIntegration kafka = new KafkaIntegration();
 
-	@RequestMapping(value="/send",method=RequestMethod.POST)
-	public String publish(@RequestParam("msg") String msg, @RequestParam("phone") String phone) {
-		System.out.println("Producer: Phone[" + phone + "], msg[" + msg+"]");
+	@RequestMapping(value = "/send", method = RequestMethod.POST)
+	public String publish(@RequestParam("msg") String msg,
+			@RequestParam("phone") String phone) {
+		System.out.println("Producer: Phone[" + phone + "], msg[" + msg + "]");
 		String uuid = UUID.randomUUID().toString();
 		kafka.initMessagingSystem();
 		// TODO: this object creation is not needed. Optimize this later
 		HashMap msgMap = new HashMap();
 		msgMap.put(Constants.TOPIC, Constants.KAFKA_DEMO_WECHAT);
-		//msgMap.put(Constants.MESSAGE_VALUE, "phone:"+phone+",key:" + uuid + ",msg:" + msg);
-		msgMap.put(Constants.MESSAGE_VALUE, "phone:"+phone+",key:" + uuid + ",msg:" + msg);
+		// msgMap.put(Constants.MESSAGE_VALUE, "phone:"+phone+",key:" + uuid +
+		// ",msg:" + msg);
+		msgMap.put(Constants.MESSAGE_VALUE, "phone:" + phone + ",key:" + uuid
+				+ ",msg:" + msg);
 		msgMap.put(Constants.MESSAGE_KEY, uuid);
 		msgMap.put(Constants.PAYLOAD, msg);
 		try {
@@ -46,9 +49,10 @@ public class IngestController {
 		return null;
 	}
 
-	@RequestMapping(value="/get",method=RequestMethod.GET)
-	public void consume(@RequestParam("group") String group, 
-			@RequestParam("topic") String topic, @RequestParam("numOfThreads") int numOfThreads) {
+	@RequestMapping(value = "/get", method = RequestMethod.GET)
+	public void consume(@RequestParam("group") String group,
+			@RequestParam("topic") String topic,
+			@RequestParam("numOfThreads") int numOfThreads) {
 		kafka.consumeMessage(group, topic, numOfThreads);
 		return;
 	}
