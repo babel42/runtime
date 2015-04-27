@@ -6,9 +6,9 @@ import com.ca.utils.data.ValueObject;
 public class CSVBatchController implements IBatchController {
 
 	@Override
-	public boolean run() {
+	public IValueObject execute(IValueObject vo) {
 		// TODO Auto-generated method stub
-		return false;
+		return vo;
 	}
 
 	@Override

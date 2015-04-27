@@ -5,9 +5,9 @@ import com.ca.utils.data.IValueObject;
 public class JSONBatchController implements IBatchController{
 
 	@Override
-	public boolean run() {
+	public IValueObject execute(IValueObject vo) {
 		// TODO Auto-generated method stub
-		return false;
+		return vo;
 	}
 
 	@Override
