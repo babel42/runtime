@@ -5,8 +5,8 @@ import java.util.concurrent.Future;
 
 import org.apache.kafka.clients.producer.RecordMetadata;
 
-import com.chirpanywhere.framework.errorhandling.CAInvalidMessageException;
-import com.chirpanywhere.framework.errorhandling.InvalidClusterConfigException;
+import com.ca.framework.errorhandling.CAInvalidMessageException;
+import com.ca.framework.errorhandling.InvalidClusterConfigException;
 
 public interface MessagingIntegration {
 	

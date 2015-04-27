@@ -1,4 +1,4 @@
-package com.chirpanywhere.framework.errorhandling;
+package com.ca.framework.errorhandling;
 
 public class CAInvalidMessageException extends Exception {
 

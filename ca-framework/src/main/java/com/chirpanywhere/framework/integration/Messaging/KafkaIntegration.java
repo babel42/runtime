@@ -14,8 +14,8 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.PartitionInfo;
 
-import com.chirpanywhere.framework.errorhandling.CAInvalidMessageException;
-import com.chirpanywhere.framework.errorhandling.InvalidClusterConfigException;
+import com.ca.framework.errorhandling.CAInvalidMessageException;
+import com.ca.framework.errorhandling.InvalidClusterConfigException;
 import com.chirpanywhere.framework.utils.Constants;
 
 public class KafkaIntegration implements MessagingIntegration {
