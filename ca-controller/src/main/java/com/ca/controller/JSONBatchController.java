@@ -1,26 +1,25 @@
 package com.ca.controller;
 
+import com.ca.framework.errorhandling.CAException;
 import com.ca.utils.data.IValueObject;
 
-public class JSONBatchController implements IBatchController{
+public class JSONBatchController implements IBatchController {
 
 	@Override
-	public IValueObject execute(IValueObject vo) {
+	public IValueObject execute(IValueObject vo) throws CAException {
 		// TODO Auto-generated method stub
 		return vo;
 	}
 
-	@Override
-	public IValueObject getStoredMetadata(IValueObject vo) {
-		// TODO Auto-generated method stub
-return vo;
-	}
-
-	@Override
-	public IValueObject validatePrivelages(IValueObject vo) {
+	private IValueObject getStoredMetadata(IValueObject vo) {
 		// TODO Auto-generated method stub
 		return vo;
-		
+	}
+
+	private IValueObject validatePrivelages(IValueObject vo) {
+		// TODO Auto-generated method stub
+		return vo;
+
 	}
 
 }

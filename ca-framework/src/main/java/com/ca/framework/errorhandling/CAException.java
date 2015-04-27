@@ -6,13 +6,10 @@ public class CAException extends Throwable {
 	public CAException(Throwable ex, String sourceMsg, CAError err) {
 		super(sourceMsg, ex);
 		error=err;
-
 	}
 
 	public CAException(Throwable ex, String sourceMsg, int errorCode) {
 		super(sourceMsg, ex);
 		error.setErrorCode(errorCode);
-
 	}
-
 }

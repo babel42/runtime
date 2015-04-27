@@ -1,33 +1,33 @@
 package com.ca.controller;
 
+import com.ca.framework.errorhandling.CAException;
 import com.ca.utils.data.IValueObject;
 import com.ca.utils.data.ValueObject;
 
 public class CSVBatchController implements IBatchController {
 
 	@Override
-	public IValueObject execute(IValueObject vo) {
+	public IValueObject execute(IValueObject vo) throws CAException{
 		// TODO Auto-generated method stub
 		return vo;
 	}
 
-	@Override
-	public IValueObject getStoredMetadata(IValueObject vo) {
+	private IValueObject getStoredMetadata(IValueObject vo) {
 		// TODO Auto-generated method stub
 		return vo;
 	}
 
-	public IValueObject validatePrivelages(IValueObject vo) {
+	private IValueObject validatePrivelages(IValueObject vo) {
 		return vo;
 		// TODO Auto-generated method stub
 		
 	}
-	public void authenticateUser() {
+	private void authenticateUser() {
 		// TODO Auto-generated method stub
 		
 	}
 	
-	public IValueObject validateBatch(IValueObject vo){
+	private IValueObject validateBatch(IValueObject vo){
 		return new ValueObject();
 	}
 
