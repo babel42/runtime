@@ -1,5 +1,7 @@
 package com.ca.controller;
 
+import com.ca.utils.data.IValueObject;
+
 public interface ITransactionController extends IController {
-	boolean run();
+	IValueObject execute(IValueObject VO);
 }
