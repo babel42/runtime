@@ -16,7 +16,7 @@ import org.apache.kafka.common.PartitionInfo;
 
 import com.ca.framework.errorhandling.CAInvalidMessageException;
 import com.ca.framework.errorhandling.InvalidClusterConfigException;
-import com.chirpanywhere.framework.utils.Constants;
+import com.ca.framework.utils.Constants;
 
 public class KafkaIntegration implements MessagingIntegration {
 	private ProducerConfig config = null;

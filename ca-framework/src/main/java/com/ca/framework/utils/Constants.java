@@ -1,4 +1,4 @@
-package com.chirpanywhere.framework.utils;
+package com.ca.framework.utils;
 
 public class Constants {
 
