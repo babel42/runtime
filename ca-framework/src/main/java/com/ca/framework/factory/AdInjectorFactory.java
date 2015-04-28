@@ -1,7 +1,5 @@
-package com.ca.framework.factory.transaction;
+package com.ca.framework.factory;
 
-import com.ca.framework.factory.ICreatable;
-import com.ca.framework.factory.IFactory;
 
 public class AdInjectorFactory implements IFactory {
 
