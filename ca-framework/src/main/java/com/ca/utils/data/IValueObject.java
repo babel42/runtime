@@ -1,7 +1,6 @@
 package com.ca.utils.data;
 
 public interface IValueObject {
-
-	String get(String transactionType);
-
+	public Object get(String key);
+	public void add(String key, Object value);
 }

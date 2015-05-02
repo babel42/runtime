@@ -7,9 +7,6 @@
         <dependent-module archiveName="ca-framework-1.0.0-BUILD-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ca-framework/ca-framework">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="ca-outgoing-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ca-outgoing/ca-outgoing">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="twilio-java-sdk-3.8.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/twilio-java/twilio-java">
             <dependency-type>uses</dependency-type>
         </dependent-module>

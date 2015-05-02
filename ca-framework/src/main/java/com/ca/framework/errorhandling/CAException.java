@@ -2,9 +2,10 @@ package com.ca.framework.errorhandling;
 
 import com.ca.utils.data.IValueObject;
 
-public class CAException extends Throwable {
+public class CAException extends Exception {
 	private CAError error = null;
 	private IValueObject context;
+
 
 	public CAException(Throwable ex, String sourceMsg, CAError err) {
 		super(sourceMsg, ex);
