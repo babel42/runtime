@@ -1,4 +1,4 @@
-package com.chirpanywhere.framework.integration.Messaging;
+package com.ca.framework.integration.Messaging;
  
 import kafka.api.FetchRequest;
 import kafka.api.FetchRequestBuilder;

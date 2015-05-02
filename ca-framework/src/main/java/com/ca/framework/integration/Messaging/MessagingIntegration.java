@@ -1,4 +1,4 @@
-package com.chirpanywhere.framework.integration.Messaging;
+package com.ca.framework.integration.Messaging;
 
 import java.util.Map;
 import java.util.concurrent.Future;
