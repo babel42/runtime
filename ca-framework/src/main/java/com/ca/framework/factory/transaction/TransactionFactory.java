@@ -10,11 +10,13 @@ import com.ca.utils.data.IValueObject;
 
 public class TransactionFactory {
 	static TransactionFactory instance = null;
+	static ValidatorFactory validatorFact = null;
 	static SendChannelFactory sendChannelFact = null;
-	static ReceiveChannelFactory recvChannelFact=null;
-	
-	
-	private TransactionFactory() {
+	static ReceiveChannelFactory recvChannelFact = null;
+	private String transType;
+
+	private TransactionFactory(IValueObject vo) {
+		transType = vo.get(Constants.TRANSACTION_TYPE);
 		initializeValidatorFactory();
 		initializeAdInjectinoFactory();
 		intializeChannelSenderFactory();
@@ -23,50 +25,50 @@ public class TransactionFactory {
 
 	private void initializeChannelReseverFactory() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	private void intializeChannelSenderFactory() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	private void initializeAdInjectinoFactory() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	private void initializeValidatorFactory() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-//	public static TransactionFactory getInstance() {
-//		synchronized (instance) {
-//			if (null == instance)
-//				instance = new TransactionFactory();
-//		}
-//		return instance;
-//	}
+	public static TransactionFactory getInstance(IValueObject vo) {
+		synchronized (instance) {
+			if (null == instance)
+				instance = new TransactionFactory(vo);
+		}
+		return instance;
+	}
 
 //	public ICreatable createValidator(IValueObject vo) {
 //		return ValidatorFactory.create(IValueObject
 //				.get(Constants.TRANSACTION_TYPE));
 //	}
 
-	public ICreatable createAdInjector(IValueObject vo) {
+	public IFactory getAdInjector(IValueObject vo) {
+		return vo;
+	}
+
+	public IFactory getChannelSender(IValueObject vo) {
 		return null;
 	}
 
-	public ICreatable createChannelSender(IValueObject vo) {
+	public IFactory getChannelReceiver(IValueObject vo) {
 		return null;
 	}
 
-	public ICreatable createChannelReceiver(IValueObject vo) {
-		return null;
-	}
-
-	public ICreatable createPersistenceManager(IValueObject vo) {
+	public IFactory getPersistenceManager(IValueObject vo) {
 		return null;
 	}
 }
