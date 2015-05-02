@@ -33,17 +33,21 @@ public class KafkaDrain implements ICreatable {
 		String topic = ctx.getTopic();
 		
 		List<PartitionInfo> partitions = producer.partitionsFor(topic);
-		int partitionId = pickRandomPartition(partitions);
-
-		String msg = (String) message.get(Constants.MESSAGE_VALUE);
+		int partitionId;
+		try {
+			partitionId = pickRandomPartition(partitions);
+		} catch (InvalidClusterConfigException e) {
+			throw new CAException(e, e.getLocalizedMessage(), 1025);
+		}
+        String msgKey = (String) vo.get("KAFKA_MESSAGE_KEY");
+        String msg = (String) vo.get("MESSAGE");
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		ProducerRecord producerRec = new ProducerRecord(topic, partitionId,
-				message.get(Constants.MESSAGE_KEY), msg);
-		System.out.println("KafkaIntegration.publishMessage:topic/message["
-				+ topic + "/" + msg + "]");
+				msgKey, msg);
+		
 		Future<RecordMetadata> future = producer.send(producerRec);
-
-		return future;
+		vo.add("KAFKA.RETURN.FUTURE", future);
+		return vo;
 	}
 
 	private int pickRandomPartition(List<PartitionInfo> partitions)
