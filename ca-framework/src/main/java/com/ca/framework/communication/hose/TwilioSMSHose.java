@@ -1,12 +1,12 @@
 package com.ca.framework.communication.hose;
 
-import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.ca.framework.context.TwilioContext;
 import com.ca.framework.data.IValueObject;
 import com.ca.framework.data.TwilioValueObject;
 import com.ca.framework.errorhandling.CAException;
@@ -23,16 +23,16 @@ public class TwilioSMSHose implements ICreatable {
 	public static final String FROM_PHONE = "+16789056928";
 
 	public IValueObject execute(IValueObject vo) throws CAException {
-		// TODO Auto-generated method stub
+		TwilioContext ctx = (TwilioContext) vo.getContext();
 		TwilioValueObject tvo = (TwilioValueObject) vo; // the factory that created me guarantees this.
 		System.out.println("TwilioSMSHose.send(): received ["+tvo.getToPhone() +"/"+tvo.getMsg()+"]");
-		TwilioRestClient client = new TwilioRestClient(tvo.getAccountSid(), tvo.getAuthToken()); 
+		TwilioRestClient client = new TwilioRestClient(ctx.getAccountSid(), ctx.getAuthToken()); 
 		System.out.println("TwilioSMSHose.send(): created client");
 
 		// Build the parameters 
 		List<NameValuePair> params = new ArrayList<NameValuePair>(); 
 		params.add(new BasicNameValuePair("To", tvo.getToPhone())); 
-		params.add(new BasicNameValuePair("From", tvo.getFromPhone())); 
+		params.add(new BasicNameValuePair("From", ctx.getFromPhone())); 
 		params.add(new BasicNameValuePair("Body", tvo.getMsg().toString()));   
 
 		MessageFactory messageFactory = client.getAccount().getMessageFactory(); 

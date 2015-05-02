@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Future;
 
+import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.PartitionInfo;
 
+import com.ca.framework.context.KafkaContext;
 import com.ca.framework.data.IValueObject;
 import com.ca.framework.errorhandling.CAException;
 import com.ca.framework.errorhandling.InvalidClusterConfigException;
@@ -27,14 +29,13 @@ public class KafkaDrain implements ICreatable {
 	public IValueObject execute(IValueObject vo) throws CAException {
 
 		KafkaContext ctx = (KafkaContext) vo.getContext();
+		KafkaProducer producer = ctx.getProducer();
+		String topic = ctx.getTopic();
 		
-		List<PartitionInfo> partitions = producer
-				.partitionsFor((String) message.get(Constants.TOPIC));
-
+		List<PartitionInfo> partitions = producer.partitionsFor(topic);
 		int partitionId = pickRandomPartition(partitions);
 
 		String msg = (String) message.get(Constants.MESSAGE_VALUE);
-		String topic = (String) message.get(Constants.TOPIC);
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		ProducerRecord producerRec = new ProducerRecord(topic, partitionId,
 				message.get(Constants.MESSAGE_KEY), msg);
