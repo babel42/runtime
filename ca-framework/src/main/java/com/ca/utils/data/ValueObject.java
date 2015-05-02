@@ -20,4 +20,9 @@ public class ValueObject implements IValueObject {
 		
 	}
 
+	public String get(String transactionType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
