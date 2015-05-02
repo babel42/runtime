@@ -1,7 +1,7 @@
 package com.ca.framework.factory.transaction;
 
+import com.ca.framework.data.IValueObject;
 import com.ca.framework.utils.Constants;
-import com.ca.utils.data.IValueObject;
 
 public class SMSTransactionFactory extends TransactionFactory {
 	String type = Constants.TRANSACTION_TYPE_SMS;

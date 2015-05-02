@@ -1,12 +1,12 @@
 package com.ca.framework.factory.transaction;
 
+import com.ca.framework.data.IValueObject;
 import com.ca.framework.factory.ICreatable;
 import com.ca.framework.factory.IFactory;
 import com.ca.framework.factory.ReceiveChannelFactory;
 import com.ca.framework.factory.SendChannelFactory;
 import com.ca.framework.factory.ValidatorFactory;
 import com.ca.framework.utils.Constants;
-import com.ca.utils.data.IValueObject;
 
 public class TransactionFactory {
 	static TransactionFactory instance = null;

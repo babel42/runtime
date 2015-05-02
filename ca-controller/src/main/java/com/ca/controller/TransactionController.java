@@ -1,11 +1,11 @@
 package com.ca.controller;
 
+import com.ca.framework.data.IValueObject;
 import com.ca.framework.errorhandling.CAException;
 import com.ca.framework.factory.ICreatable;
 import com.ca.framework.factory.IFactory;
 import com.ca.framework.factory.transaction.TransactionFactory;
 import com.ca.framework.utils.Constants;
-import com.ca.utils.data.IValueObject;
 
 public class TransactionController implements ITransactionController {
 	String transType;

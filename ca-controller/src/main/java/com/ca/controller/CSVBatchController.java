@@ -1,8 +1,8 @@
 package com.ca.controller;
 
+import com.ca.framework.data.IValueObject;
+import com.ca.framework.data.ValueObject;
 import com.ca.framework.errorhandling.CAException;
-import com.ca.utils.data.IValueObject;
-import com.ca.utils.data.ValueObject;
 
 public class CSVBatchController implements IBatchController {
 

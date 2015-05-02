@@ -1,6 +1,6 @@
 package com.ca.framework.factory.transaction;
 
-import com.ca.utils.data.IValueObject;
+import com.ca.framework.data.IValueObject;
 
 public class TwitterTransactionFactory extends TransactionFactory {
 

@@ -7,16 +7,16 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.ca.framework.data.IValueObject;
+import com.ca.framework.data.TwilioValueObject;
 import com.ca.framework.errorhandling.CAException;
 import com.ca.framework.factory.ICreatable;
-import com.ca.utils.data.IValueObject;
-import com.ca.utils.data.communication.TwilioValueObject;
 import com.twilio.sdk.TwilioRestClient;
 import com.twilio.sdk.TwilioRestException;
 import com.twilio.sdk.resource.factory.MessageFactory;
 import com.twilio.sdk.resource.instance.Message;
 
-public class TwilioSMSSender implements ICreatable {
+public class TwilioSMSHose implements ICreatable {
 	// Find your Account Sid and Token at twilio.com/user/account 
 	public static final String ACCOUNT_SID = "AC589c5fe4aee0746a2285e718c0d8341e"; 
 	public static final String AUTH_TOKEN = "7476f459573937aec71b04f768881b91"; 
@@ -25,9 +25,9 @@ public class TwilioSMSSender implements ICreatable {
 	public IValueObject execute(IValueObject vo) throws CAException {
 		// TODO Auto-generated method stub
 		TwilioValueObject tvo = (TwilioValueObject) vo; // the factory that created me guarantees this.
-		System.out.println("TwilioSMSSender.send(): received ["+tvo.getToPhone() +"/"+tvo.getMsg()+"]");
+		System.out.println("TwilioSMSHose.send(): received ["+tvo.getToPhone() +"/"+tvo.getMsg()+"]");
 		TwilioRestClient client = new TwilioRestClient(tvo.getAccountSid(), tvo.getAuthToken()); 
-		System.out.println("TwilioSMSSender.send(): created client");
+		System.out.println("TwilioSMSHose.send(): created client");
 
 		// Build the parameters 
 		List<NameValuePair> params = new ArrayList<NameValuePair>(); 

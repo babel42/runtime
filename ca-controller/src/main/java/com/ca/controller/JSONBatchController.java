@@ -1,7 +1,7 @@
 package com.ca.controller;
 
+import com.ca.framework.data.IValueObject;
 import com.ca.framework.errorhandling.CAException;
-import com.ca.utils.data.IValueObject;
 
 public class JSONBatchController implements IBatchController {
 

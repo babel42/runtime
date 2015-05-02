@@ -1,6 +1,6 @@
 package com.ca.framework.errorhandling;
 
-import com.ca.utils.data.IValueObject;
+import com.ca.framework.data.IValueObject;
 
 public class CAException extends Exception {
 	private CAError error = null;
