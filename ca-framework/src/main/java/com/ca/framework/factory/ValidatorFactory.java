@@ -6,5 +6,4 @@ public class ValidatorFactory implements IFactory {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

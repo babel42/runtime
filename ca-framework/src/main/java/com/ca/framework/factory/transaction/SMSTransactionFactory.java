@@ -1,12 +1,14 @@
 package com.ca.framework.factory.transaction;
 
+import com.ca.framework.utils.Constants;
 import com.ca.utils.data.IValueObject;
 
 public class SMSTransactionFactory extends TransactionFactory {
+	String type = Constants.TRANSACTION_TYPE_SMS;
 
 	@Override
 	public IValueObject createValidator(IValueObject vo) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 

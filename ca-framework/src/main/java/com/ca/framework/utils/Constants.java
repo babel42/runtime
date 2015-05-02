@@ -2,6 +2,7 @@ package com.ca.framework.utils;
 
 public class Constants {
 
+	public static final String TRANSACTION_TYPE = "Trans_Type";
 	public static String PAYLOAD = "Payload";
 	public static String KAFKA_DEMO_WECHAT = "kafka_demo_wechat";
 	public static String KAFKA_DEMO_SMS = "kafka_demo_sms";
@@ -11,4 +12,6 @@ public class Constants {
 	public static String ZOOKEEPER_HOST = "192.168.1.199";
 	public static String ZOOKEEPER_PORT = "2181";
 	public static String KAFKA_HOST = "192.168.1.199:9092";
+	public static String TRANSACTION_TYPE_SMS = "SMS_Transasion";
+	
 }
