@@ -22,6 +22,10 @@ public class CAException extends Exception {
 		context = cxt;
 	}
 
+	public CAException(String sourceMsg, IValueObject cxt) {
+		context = cxt;
+	}
+	
 	public CAError getError() {
 		return error;
 	}

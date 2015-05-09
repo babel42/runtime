@@ -2,8 +2,13 @@ package com.ca.framework.utils;
 
 public class Constants {
 
+	// ValueObject Tags
 	public static final String TRANSACTION_TYPE = "Trans_Type";
+	public static final String INTENT = "Intent";	
 	public static String PAYLOAD = "Payload";
+	public static String CREATABLE_CONFIG_DATA = "CreatableConfigData";
+	
+	// Other non-categorized tags
 	public static String KAFKA_DEMO_WECHAT = "kafka_demo_wechat";
 	public static String KAFKA_DEMO_SMS = "kafka_demo_sms";
 	public static String MESSAGE_KEY = "message_key";

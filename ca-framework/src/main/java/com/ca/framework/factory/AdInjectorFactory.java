@@ -1,6 +1,6 @@
 package com.ca.framework.factory;
 
-import com.ca.utils.data.IValueObject;
+import com.ca.framework.data.IValueObject;
 
 
 public class AdInjectorFactory implements IFactory {

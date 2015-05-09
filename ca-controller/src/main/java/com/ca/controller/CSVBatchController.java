@@ -28,7 +28,7 @@ public class CSVBatchController implements IBatchController {
 	}
 	
 	private IValueObject validateBatch(IValueObject vo){
-		return new ValueObject();
+		return null;
 	}
 
 	
