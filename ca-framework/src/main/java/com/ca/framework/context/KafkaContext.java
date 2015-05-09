@@ -1,26 +1,26 @@
 package com.ca.framework.context;
 
-import org.apache.kafka.clients.producer.KafkaProducer;
-
-import com.ca.framework.data.ValueObject;
-
-
+import java.util.Map;
+import java.util.Properties;
+/*
+ *Properties props = new Properties();
+ * props.put("bootstrap.servers", "localhost:4242");
+ * props.put("acks", "all");
+ * props.put("retries", 0);
+ * props.put("batch.size", 16384);
+ * props.put("linger.ms", 1);
+ * props.put("buffer.memory", 33554432);
+ * props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+ * props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+ * 
+*/
 public class KafkaContext extends ContextData {
-	private KafkaProducer producer;
+	
 	private String topic;
 	
-	public KafkaContext(KafkaProducer p, String t) {
-		super(null);
-		producer = p;
+	public KafkaContext(Map<String,Object> p, String t) {
+		super(null, p);
 		topic = t;
-	}
-
-	public KafkaProducer getProducer() {
-		return producer;
-	}
-
-	public void setProducer(KafkaProducer producer) {
-		this.producer = producer;
 	}
 
 	public String getTopic() {

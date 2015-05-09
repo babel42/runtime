@@ -1,6 +1,7 @@
 package com.ca.framework.communication.drain;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Future;
 
@@ -14,7 +15,6 @@ import com.ca.framework.data.IValueObject;
 import com.ca.framework.errorhandling.CAException;
 import com.ca.framework.errorhandling.InvalidClusterConfigException;
 import com.ca.framework.factory.ICreatable;
-import com.ca.framework.utils.Constants;
 
 /**
  * This class will receive/drain messages from some external source. The
@@ -29,7 +29,8 @@ public class KafkaDrain implements ICreatable {
 	public IValueObject execute(IValueObject vo) throws CAException {
 
 		KafkaContext ctx = (KafkaContext) vo.getContext();
-		KafkaProducer producer = ctx.getProducer();
+		Map<String, Object> props = ctx.getMap();
+		KafkaProducer producer = new KafkaProducer(props);
 		String topic = ctx.getTopic();
 		
 		List<PartitionInfo> partitions = producer.partitionsFor(topic);

@@ -1,13 +1,17 @@
 package com.ca.framework.data;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import com.ca.framework.context.IContextData;
 
 public class ValueObject implements IValueObject {
-	private HashMap vo;
+	private Map<String, Object> vo;
 	private IContextData ctx;
 	
+	public ValueObject(IContextData ctx, Map<String, Object> props) {
+		
+	}
 	public ValueObject(IContextData ctx) {
 		vo = new HashMap<String, Object>();
 		this.ctx = ctx;
@@ -32,5 +36,12 @@ public class ValueObject implements IValueObject {
 
 	public void setContext(IContextData data) {
 		ctx = data;
+	}
+	
+	public Map<String, Object> getMap() {
+		return vo;
+	}
+	public void setMap(Map<String, Object> vo) {
+		this.vo = vo;
 	}
 }
