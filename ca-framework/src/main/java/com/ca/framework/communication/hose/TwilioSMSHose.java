@@ -48,4 +48,9 @@ public class TwilioSMSHose implements ICreatable {
 		tvo.add("TWILIO_MESSAGE_SID", msgSid);
 		return tvo;
 	}
+
+	public void configure(IValueObject vo) {
+		// TODO Auto-generated method stub
+		
+	}
 }

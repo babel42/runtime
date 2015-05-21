@@ -13,16 +13,11 @@ public class TransactionController implements ITransactionController {
 
 	@Override
 	public IValueObject execute(IValueObject vo) throws CAException {
-//		transType = vo.get(Constants.TRANSACTION_TYPE);
-//		fact = ServiceLocator.getFactory(transType); //?? needed ??
-//		fact.create(type) // Cannot work with just the IFacotry as every type of factory may need objects of different class set
-		
-//		ICreatable transValidator = TransactionFactory.createValidator();
-//		ICreatable userAuth = TransactionFactory.createUserAuth();
-//		ICreatable 
+		TransactionFactory fact = TransactionFactory.getInstance(vo);
+		ICreatable hose = fact.createObject(Constants.TRANSACTION_TYPE_SMS, "hose", vo);
+		IValueObject respVo = hose.execute(vo);
 
-
-		return vo;
+		return respVo;
 	}
 
 }

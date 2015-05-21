@@ -72,4 +72,9 @@ public class KafkaDrain implements ICreatable {
 
 		return part - 1;
 	}
+
+	public void configure(IValueObject vo) {
+		// TODO Auto-generated method stub
+		
+	}
 }
