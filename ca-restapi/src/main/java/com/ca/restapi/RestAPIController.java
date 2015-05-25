@@ -1,27 +1,26 @@
 package com.ca.restapi;
 
-import java.util.Date;
-import java.util.HashMap;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ca.framework.communication.hose.TwilioSMSHose;
-import com.ca.framework.context.TwilioContext;
 import com.ca.framework.data.IValueObject;
-import com.ca.framework.data.TwilioValueObject;
 import com.ca.framework.data.ValueObject;
 import com.ca.framework.errorhandling.CAException;
 import com.ca.framework.factory.ICreatable;
 import com.ca.framework.factory.transaction.TransactionFactory;
-import com.ca.framework.integration.Messaging.KafkaIntegration;
-//import org.apache.kafka.clients.producer;
 import com.ca.framework.utils.Constants;
+
+//import com.ca.framework.integration.Messaging.KafkaIntegration;
+//import org.apache.kafka.clients.producer;
+//import java.util.Date;
+//import java.util.HashMap;
+//import com.ca.framework.data.TwilioValueObject;
+//import com.ca.framework.communication.hose.TwilioSMSHose;
+//import com.ca.framework.context.TwilioContext;
+
 
 @RestController
 public class RestAPIController {
-	KafkaIntegration kafka = new KafkaIntegration();
-
 	@RequestMapping("/")
 	public String index() {
 		return "Greetings from Spring Boot!";
@@ -44,7 +43,7 @@ public class RestAPIController {
 		}
 
 		IValueObject vo = new ValueObject();
-
+	    vo.add(Constants.TRANSACTION_TYPE, Constants.SMS_TRANSACTION);
 		vo.add(Constants.TWILIO_AUTH_TOKEN, authToken);
 		vo.add(Constants.DEST_TEL_NUM, phone);
 		vo.add(Constants.MESSAGE_VALUE, msg);
@@ -57,6 +56,9 @@ public class RestAPIController {
 		hose.configure(vo);
 
 		IValueObject respVo = hose.execute(vo);
+		
+		// change the following return to 
+		return msg;
 
 		// TwilioContext ctx = new
 		// TwilioContext("https://api.twilio.com/2010-04-01",
@@ -66,7 +68,7 @@ public class RestAPIController {
 		// TwilioValueObject tvo = new TwilioValueObject(ctx, phone, msg + "@" +
 		// new Date().toString());
 		// new TwilioSMSHose().execute(tvo);
-		return msg;
+
 	}
 
 	/**
@@ -91,7 +93,6 @@ public class RestAPIController {
 
 	@RequestMapping("/get/demo/wechat")
 	public void consume(String group, String topic, int threads) {
-		kafka.consumeMessage(group, topic, threads);
 	}
 
 	// @RequestMapping("/error")
