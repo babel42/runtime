@@ -23,10 +23,10 @@ public class TransactionFactory {
 	 * @throws CAException
 	 */
 	private TransactionFactory(IValueObject vo) throws CAException {
-		loadFactoryRegistrations();
+		loadFactoryRegistrations(vo);
 	}
 
-	private void loadFactoryRegistrations() {
+	private void loadFactoryRegistrations(IValueObject vo) {
 		// Add more registrations here. Thing to remember is to to create the
 		// resource file in the classpath.
 		// If needed, this file can be externalize in the file system, but I
@@ -35,7 +35,7 @@ public class TransactionFactory {
 
 		// Context will register all static context for all types of
 		// transactions and customers
-		//register("context.properties", "context");
+		loadStaticContext("context.properties", vo);
 
 		// Following will register all the Creatables needed for each intent
 		register("hose.properties", "hose");

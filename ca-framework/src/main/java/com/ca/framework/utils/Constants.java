@@ -1,7 +1,6 @@
 package com.ca.framework.utils;
 
 public class Constants {
-
 	// ValueObject Tags
 	public static final String TRANSACTION_TYPE = "Trans_Type";
 	public static final String INTENT = "Intent";
@@ -13,6 +12,7 @@ public class Constants {
 	public static final String TWILIO_CONTEXT = "TwilioContext";
 	public static final String TWILIO_VO = "TwilioVo";
 	public static final String DEST_TEL_NUM = "DestinationTelNum";
+	public static final String SMS_TRANSACTION = "SMS_Transaction";
 	
 	public static String PAYLOAD = "Payload";
 	public static String DYNAMIC_CREATABLE_CONFIG_DATA = "DynamicCreatableConfigData";
@@ -27,5 +27,4 @@ public class Constants {
 	public static String ZOOKEEPER_PORT = "2181";
 	public static String KAFKA_HOST = "192.168.1.199:9092";
 	public static String TRANSACTION_TYPE_SMS = "SMS_Transaction";
-	
 }
