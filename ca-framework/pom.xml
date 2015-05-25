@@ -9,6 +9,12 @@
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 
 	<dependencies>
+		<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>5.1.9</version>
+	</dependency>
+	
 		<!-- Kafka -->
 		<dependency>
 			<groupId>org.apache.kafka</groupId>
