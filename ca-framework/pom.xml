@@ -17,10 +17,10 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-	    <groupId>org.apache.kafka</groupId>
-	    <artifactId>kafka-clients</artifactId>
-	    <version>0.8.2.0</version>
-	</dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka-clients</artifactId>
+			<version>0.8.2.0</version>
+		</dependency>
 		<dependency>
 			<groupId>com.chirpanywhere</groupId>
 			<artifactId>ca-outgoing</artifactId>
@@ -32,6 +32,11 @@
 			<groupId>org.neo4j</groupId>
 			<artifactId>neo4j-cypher-compiler-2.1</artifactId>
 			<version>2.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.2</version>
 		</dependency>
 	</dependencies>
 	<repositories>

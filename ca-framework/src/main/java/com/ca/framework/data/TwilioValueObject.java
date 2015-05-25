@@ -1,6 +1,7 @@
 package com.ca.framework.data;
 
 import com.ca.framework.context.TwilioContext;
+import com.ca.framework.utils.Constants;
 
 
 public class TwilioValueObject extends ValueObject {
@@ -11,6 +12,12 @@ public class TwilioValueObject extends ValueObject {
 		super(ctx);
 		toPhone = to;
 		this.msg = msg;
+	}
+	public TwilioValueObject(IValueObject vo)
+	{
+		super((TwilioContext)vo.get(Constants.TWILIO_CONTEXT));
+		toPhone = (String) vo.get(Constants.DEST_TEL_NUM);
+		msg = (String) vo.get(Constants.MESSAGE_VALUE);
 	}
 	
 	public String getToPhone() {

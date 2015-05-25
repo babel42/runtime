@@ -17,6 +17,9 @@ public class ValueObject implements IValueObject {
 		this.ctx = ctx;
 	}
 	
+	public ValueObject() {
+		vo = new HashMap<String, Object>();
+	}
 	public void printContents()
 	{
 		

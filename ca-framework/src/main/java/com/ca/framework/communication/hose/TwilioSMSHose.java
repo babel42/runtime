@@ -11,20 +11,38 @@ import com.ca.framework.data.IValueObject;
 import com.ca.framework.data.TwilioValueObject;
 import com.ca.framework.errorhandling.CAException;
 import com.ca.framework.factory.ICreatable;
+import com.ca.framework.utils.Constants;
 import com.twilio.sdk.TwilioRestClient;
 import com.twilio.sdk.TwilioRestException;
 import com.twilio.sdk.resource.factory.MessageFactory;
 import com.twilio.sdk.resource.instance.Message;
 
 public class TwilioSMSHose implements ICreatable {
-	// Find your Account Sid and Token at twilio.com/user/account 
+	// Find your Account Sid and Token at twilio.com/user/account
+	// This should be registered in the static context. 
 	public static final String ACCOUNT_SID = "AC589c5fe4aee0746a2285e718c0d8341e"; 
 	public static final String AUTH_TOKEN = "7476f459573937aec71b04f768881b91"; 
 	public static final String FROM_PHONE = "+16789056928";
 
 	public IValueObject execute(IValueObject vo) throws CAException {
-		TwilioContext ctx = (TwilioContext) vo.getContext();
-		TwilioValueObject tvo = (TwilioValueObject) vo; // the factory that created me guarantees this.
+		
+		
+		
+//		TwilioContext ctx = new TwilioContext("https://api.twilio.com/2010-04-01", 
+//        "AC589c5fe4aee0746a2285e718c0d8341e", 
+//        "7476f459573937aec71b04f768881b91",
+//        "+16789056928");
+//		TwilioValueObject tvo = new TwilioValueObject(ctx, phone, msg + "@" + new Date().toString());
+		
+		// Assumes that static context, dynamic context and transaction info is in the vo,
+		// static context set by factory and dynamic context/transaction data set by controller
+		TwilioContext ctx = new TwilioContext(vo);
+		vo.add(Constants.TWILIO_CONTEXT, ctx);
+		
+		// the factory that created me and controller that called me guarantees this.
+		TwilioValueObject tvo = (TwilioValueObject)vo.get(Constants.TWILIO_VO); 
+		
+		
 		System.out.println("TwilioSMSHose.send(): received ["+tvo.getToPhone() +"/"+tvo.getMsg()+"]");
 		TwilioRestClient client = new TwilioRestClient(ctx.getAccountSid(), ctx.getAuthToken()); 
 		System.out.println("TwilioSMSHose.send(): created client");
@@ -50,7 +68,10 @@ public class TwilioSMSHose implements ICreatable {
 	}
 
 	public void configure(IValueObject vo) {
-		// TODO Auto-generated method stub
+		// Assumes that static context, dynamic context and transaction info is in the vo,
+		// static context set by factory and dynamic context/transaction data set by controller
+		TwilioContext ctx = new TwilioContext(vo);
+		vo.add(Constants.TWILIO_CONTEXT, ctx);	
 		
 	}
 }

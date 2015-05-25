@@ -29,10 +29,17 @@ public class TransactionFactory {
 	private void loadFactoryRegistrations() {
 		// Add more registrations here. Thing to remember is to to create the
 		// resource file in the classpath.
-		// If needed this file can be externalize in the file system, but I have
+		// If needed, this file can be externalize in the file system, but I
+		// have
 		// decided against that as that will make the deployment fickle
+
+		// Context will register all static context for all types of
+		// transactions and customers
+		//register("context.properties", "context");
+
+		// Following will register all the Creatables needed for each intent
 		register("hose.properties", "hose");
-		register("drain.properties", "drain");
+		register("drain.properties","drain");
 	}
 
 	private void register(String bundleFile, String intent) {
@@ -112,9 +119,14 @@ public class TransactionFactory {
 	 */
 	public ICreatable createObject(String transType, String intent,
 			IValueObject vo) {
-		// String objectName = register.getClass(transType2,intent2);
 		HashMap intentMap = (HashMap) register.get(intent);
 		ICreatable obj = (ICreatable) intentMap.get(transType);
+
+		// Object will configure itself from the data in the VO. After
+		// configuration, it will be ready to execute
+		// TODO: Check if the same factory object can be given to every caller
+		// or does it need to be cloned? (i.e. will every thread be able to use
+		// the same object
 		obj.configure(vo);
 		return obj;
 	}
