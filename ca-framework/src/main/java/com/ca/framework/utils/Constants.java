@@ -4,7 +4,6 @@ public class Constants {
 	// ValueObject Tags
 	public static final String TRANSACTION_TYPE = "Trans_Type";
 	public static final String INTENT = "Intent";
-	public static final String STATIC_CREATABLE_CONFIG_DATA = "StaticCreatableConfigData";
 	public static final Object TWILIO_BASE_URL = "TwilioBaseUrl";
 	public static final Object TWILIO_ACCT_SID = "TwilioAcctSid";
 	public static final String TWILIO_AUTH_TOKEN = "TwilioAuthToken";
@@ -16,6 +15,7 @@ public class Constants {
 	
 	public static String PAYLOAD = "Payload";
 	public static String DYNAMIC_CREATABLE_CONFIG_DATA = "DynamicCreatableConfigData";
+	public static final String STATIC_CREATABLE_CONFIG_DATA = "StaticCreatableConfigData";
 	
 	// Other non-categorized tags
 	public static String KAFKA_DEMO_WECHAT = "kafka_demo_wechat";
