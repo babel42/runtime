@@ -27,19 +27,35 @@ public class TransactionFactory {
 	}
 
 	private void loadFactoryRegistrations(IValueObject vo) {
-		// Add more registrations here. Thing to remember is to to create the
-		// resource file in the classpath.
-		// If needed, this file can be externalize in the file system, but I
-		// have
-		// decided against that as that will make the deployment fickle
+		
 
 		// Context will register all static context for all types of
 		// transactions and customers
 		loadStaticContext("context.properties", vo);
 
 		// Following will register all the Creatables needed for each intent
+		// Add more registrations here. Thing to remember is to to create the
+		// resource file in the classpath.
+		// If needed, this file can be externalize in the file system, but I have
+		// decided against that as that will make the deployment fickle
 		register("hose.properties", "hose");
 		register("drain.properties","drain");
+	}
+
+	
+	private void loadStaticContext(String bundleFile, IValueObject vo) {
+		ResourceBundle bundle = ResourceBundle.getBundle(bundleFile);
+		Enumeration<String> keys = bundle.getKeys();
+		String key = null;
+		String value = null;
+		HashMap<String, String> context = new HashMap();
+
+		while (keys.hasMoreElements()) {
+			key = keys.nextElement();
+			value = (String) bundle.getObject(key);
+			context.put(key, value);
+		}
+		vo.add(Constants.STATIC_CREATABLE_CONFIG_DATA, context);		
 	}
 
 	private void register(String bundleFile, String intent) {
@@ -126,13 +142,9 @@ public class TransactionFactory {
 		// configuration, it will be ready to execute
 		// TODO: Check if the same factory object can be given to every caller
 		// or does it need to be cloned? (i.e. will every thread be able to use
-		// the same object
+		// the same object? Probably not. might need to clone or pool)
 		obj.configure(vo);
 		return obj;
 	}
 
-	private boolean validate(IValueObject vo) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }
