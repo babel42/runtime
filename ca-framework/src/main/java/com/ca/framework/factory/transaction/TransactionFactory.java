@@ -27,15 +27,13 @@ public class TransactionFactory {
 	}
 
 	private void loadFactoryRegistrations(IValueObject vo) {
-		
-
 		// Context will register all static context for all types of
 		// transactions and customers
 		loadStaticContext("context.properties", vo);
 
 		// Following will register all the Creatables needed for each intent
-		// Add more registrations here. Thing to remember is to to create the
-		// resource file in the classpath.
+		// Add more registrations here. 
+		// Just create the resource file in the classpath.
 		// If needed, this file can be externalize in the file system, but I have
 		// decided against that as that will make the deployment fickle
 		register("hose.properties", "hose");
@@ -131,6 +129,9 @@ public class TransactionFactory {
 	 * @param intent
 	 *            This variable defines what is the intended functionality for
 	 *            the required object
+	 * @param vo
+	 *            This variable carries all the data to configure the newly 
+	 *            created object
 	 * @return the createable object for
 	 */
 	public ICreatable createObject(String transType, String intent,

@@ -37,10 +37,11 @@ public class TwilioSMSHose implements ICreatable {
 		// Assumes that static context, dynamic context and transaction info is in the vo,
 		// static context set by factory and dynamic context/transaction data set by controller
 		TwilioContext ctx = new TwilioContext(vo);
+		// Putting cooked TwilioContext back in the vo just in case other shumcks down the line need it
 		vo.add(Constants.TWILIO_CONTEXT, ctx);
 		
-		// the factory that created me and controller that called me guarantees this.
-		TwilioValueObject tvo = (TwilioValueObject)vo.get(Constants.TWILIO_VO); 
+		// The controller that called me guarantees that the transaction request data needed is in vo.
+		TwilioValueObject tvo = (TwilioValueObject) vo.get(Constants.TWILIO_VO);
 		
 		
 		System.out.println("TwilioSMSHose.send(): received ["+tvo.getToPhone() +"/"+tvo.getMsg()+"]");

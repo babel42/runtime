@@ -4,6 +4,16 @@ public class Constants {
 	// ValueObject Tags
 	public static final String TRANSACTION_TYPE = "Trans_Type";
 	public static final String INTENT = "Intent";
+
+	// Intents
+	public static final Object TWILIO_HOSE = "TwilioHose";
+
+	// Transaction Types
+	public static final String SMS_TRANSACTION = "SMS_Transaction";
+
+	// Context and Transaction Data
+	public static String DYNAMIC_CREATABLE_CONFIG_DATA = "DynamicCreatableConfigData";
+	public static final String STATIC_CREATABLE_CONFIG_DATA = "StaticCreatableConfigData";
 	public static final Object TWILIO_BASE_URL = "TwilioBaseUrl";
 	public static final Object TWILIO_ACCT_SID = "TwilioAcctSid";
 	public static final String TWILIO_AUTH_TOKEN = "TwilioAuthToken";
@@ -11,12 +21,10 @@ public class Constants {
 	public static final String TWILIO_CONTEXT = "TwilioContext";
 	public static final String TWILIO_VO = "TwilioVo";
 	public static final String DEST_TEL_NUM = "DestinationTelNum";
-	public static final String SMS_TRANSACTION = "SMS_Transaction";
-	
+
 	public static String PAYLOAD = "Payload";
-	public static String DYNAMIC_CREATABLE_CONFIG_DATA = "DynamicCreatableConfigData";
-	public static final String STATIC_CREATABLE_CONFIG_DATA = "StaticCreatableConfigData";
-	
+
+
 	// Other non-categorized tags
 	public static String KAFKA_DEMO_WECHAT = "kafka_demo_wechat";
 	public static String KAFKA_DEMO_SMS = "kafka_demo_sms";

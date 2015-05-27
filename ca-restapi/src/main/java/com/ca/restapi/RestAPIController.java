@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ca.framework.data.IValueObject;
+import com.ca.framework.data.TwilioValueObject;
 import com.ca.framework.data.ValueObject;
 import com.ca.framework.errorhandling.CAException;
 import com.ca.framework.factory.ICreatable;
@@ -34,32 +35,48 @@ public class RestAPIController {
 		}
 
 		IValueObject vo = new ValueObject();
+		// Establish transaction type and initial intent
 		vo.add(Constants.TRANSACTION_TYPE, Constants.SMS_TRANSACTION);
+		vo.add(Constants.INTENT, Constants.TWILIO_HOSE);
+		
+		//Populate data needed by creatable
+		populateDynamicContext(vo);
 		vo.add(Constants.TWILIO_AUTH_TOKEN, authToken);
 		vo.add(Constants.DEST_TEL_NUM, phone);
 		vo.add(Constants.MESSAGE_VALUE, msg);
+		TwilioValueObject tVo = new TwilioValueObject(vo);
+		vo.add(Constants.TWILIO_VO, tVo);
 
-		populateDynamicContext(vo);
-
-		TransactionFactory fact = TransactionFactory.getInstance(vo);
-		ICreatable hose = fact.createObject(Constants.TRANSACTION_TYPE_SMS,
-				"hose", vo);
-		hose.configure(vo);
-
-		IValueObject respVo = hose.execute(vo);
+		// Execute it
+		IValueObject respVo = createAndExecute(vo);
 
 		// change the following return to return something useful to the client
 		// e.g. coorelation id
-		return msg;
+		return "DUMMY";
+	}
 
-		// TwilioContext ctx = new
-		// TwilioContext("https://api.twilio.com/2010-04-01",
-		// "AC589c5fe4aee0746a2285e718c0d8341e",
-		// "7476f459573937aec71b04f768881b91",
-		// "+16789056928");
-		// TwilioValueObject tvo = new TwilioValueObject(ctx, phone, msg + "@" +
-		// new Date().toString());
-		// new TwilioSMSHose().execute(tvo);
+	/**
+	 * This is a common method to execute all calls coming into the system
+	 * 
+	 * @param vo
+	 *            contains context and data for transaction execution
+	 * @return value object to the caller and caller can return any value out of
+	 *         the VO
+	 * @throws CAException
+	 */
+	private IValueObject createAndExecute(IValueObject vo) throws CAException {
+		TransactionFactory fact = TransactionFactory.getInstance(vo);
+		ICreatable obj = fact.createObject(
+				(String) vo.get(Constants.TRANSACTION_TYPE),
+				(String) vo.get(Constants.INTENT), vo);
+
+		// ToDo:See if this needs to be done in factory or here. Decision point
+		// is in the comments in the factory
+		// Factory is also configuring the creatable for now. Need to remove
+		// from one of these 2 places
+		obj.configure(vo);
+		IValueObject respVo = obj.execute(vo);
+		return vo;
 
 	}
 
@@ -79,7 +96,6 @@ public class RestAPIController {
 	private void populateDynamicContext(IValueObject vo) {
 		// This will be used as HashMap staticCxt = (HashMap)
 		// vo.get(Constants.DYNAMIC_CREATABLE_CONFIG_DATA);
-
 	}
 
 	@RequestMapping("/get/demo/wechat")
